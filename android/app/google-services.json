@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1030340108137",
+    "project_id": "login-auth-test-ae1e6",
+    "storage_bucket": "login-auth-test-ae1e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030340108137:android:c33fe5272feebdec20e7f8",
+        "android_client_info": {
+          "package_name": "com.example.loginandsingup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn41UB0ZKsCFduGhTbi7DwYN0NI5ioH8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
