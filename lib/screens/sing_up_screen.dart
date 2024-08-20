@@ -93,11 +93,22 @@ class _SingUpScreenState extends State<SingUpScreen> {
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
     if(user != null){
-      print("user created successful");
+      Get.snackbar(
+        "Success",
+        "Sign up successfully!",icon: const Icon(Icons.check, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
       Get.offAll(const HomeScreen());
-    }else{
-      print("Something wrong");
     }
+    return null;
 
 
   }

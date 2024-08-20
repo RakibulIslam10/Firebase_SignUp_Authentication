@@ -101,10 +101,22 @@ class _LoginScreenState extends State<LoginScreen> {
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
     if (user != null) {
-      print("user login successful");
+      Get.snackbar(
+        "Success",
+        "Login successfully!",
+        icon: const Icon(Icons.check, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
       Get.offAll(const HomeScreen());
-    } else {
-      print("Something wrong");
     }
+    return null;
   }
 }
