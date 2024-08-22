@@ -13,7 +13,6 @@ class SingUpScreen extends StatefulWidget {
 }
 
 class _SingUpScreenState extends State<SingUpScreen> {
-
   final FirebaseAuthService _auth = FirebaseAuthService();
 
   final TextEditingController _emailController = TextEditingController();
@@ -64,17 +63,21 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 SizedBox(
                   height: 50,
                   width: double.maxFinite,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _signUp();
-                      }
-                    },
-                    child: const Text(
-                      "Sing Up",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
+                  child: isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _signUp();
+                            }
+                          },
+                          child: const Text(
+                            "Sing Up",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
                 ),
                 const SizedBox(height: 20),
                 buildTextButton()
@@ -86,22 +89,38 @@ class _SingUpScreenState extends State<SingUpScreen> {
     );
   }
 
-  void _signUp()async{
+  bool isLoading = false;
+
+  void _signUp() async {
     String email = _emailController.text.trim();
     String password = _passwordController.text;
-
+    setState(() {
+      isLoading = true;
+    });
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    setState(() {
+      isLoading = false;
+    });
 
-    if(user != null){
-      print("user created successful");
+    if (user != null) {
+      Get.snackbar(
+        "Success",
+        "Sign up successfully!",
+        icon: const Icon(Icons.check, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
       Get.offAll(const HomeScreen());
-    }else{
-      print("Something wrong");
     }
-
-
+    return null;
   }
-
 
   Row buildTextButton() {
     return Row(
